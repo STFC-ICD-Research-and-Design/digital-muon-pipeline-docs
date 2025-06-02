@@ -1,0 +1,12 @@
+[book]
+authors = ["Dan Nixon"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Digital Muon Data Pipeline"
+
+[preprocessor.mermaid]
+command = "mdbook-mermaid"
+
+[output.html]
+additional-js = ["mermaid.min.js", "mermaid-init.js"]
