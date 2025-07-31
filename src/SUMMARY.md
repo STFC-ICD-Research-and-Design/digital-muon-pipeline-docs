@@ -17,3 +17,4 @@
    - [0007 Standardise error handling](./adrs/0007-standardise-error-handling.md)
    - [0008 Use OpenTelemetry](./adrs/0008-use-opentelemetry.md)
    - [0009 NeXus File Format](./adrs/0009-nexus-file-format.md)
+   - [0010 Revised error handling using miette](./adrs/0010-revised-error-handling-using-miette.md)
