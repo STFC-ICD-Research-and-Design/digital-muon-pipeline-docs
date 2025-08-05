@@ -16,64 +16,36 @@ graph RL;
     digitiser_switch_3 --- digitisers[Digitisers];
 ```
 
+## Assumptions
+
+- Per DAQ throughput of 10 Mb/s (assuming compression and safety margin)
+- Kafka replication factor = 1
+- Quantity of nodes for Redpanda broker and compute cluster are unlikely to change, but also not set in stone
+
 ## Digitisers
 
-https://www.fs.com/uk/products/134657.html
-
-### Port count
-
-32 Units x 4 DAQ each = 128 GBE ports
-
-3 x 48 GBE port switches = 144 available GBE ports
-
-43 DAQ per switch
-
-### Switch throughput
-
-Observed (on HIFI): throughput of 8xDAQ at Kafka broker ~= 850Mbps (at 20ms acquisition length)
-
-Double to account for desired acquisition length + some safety margin = 1.7Gbps / 8 DAQ
-
-Assuming 43 DAQ per switch: switch uplink = ~10 Gbps
-
-Total uplink throughput = 3 x ~10 Gbps = 30 Gbps
-
-Total switch throughput = ~30 Gbps
+- 32 units x 4 DAQ each = 128 GbE ports
+- 3 x 48 GbE port switches = 144 available GbE ports
+- 43 DAQ per switch
 
 ## Pipeline
 
-https://www.fs.com/uk/products/122280.html
-
-https://www.fs.com/uk/products/29123.html
-
 ### Digitiser uplinks
 
-2x 10Gbps per switch = 20 Gbps per switch
-
-3 switches x 2 links per switch = 6 links
+- 1x 10 GbE uplink per digitiser switch
+- 3 switches x 1 link per switch = 3 links
 
 ### Kafka links
 
-Require, in both directions, trace data bandwidth plus pipeline bandwidth plus some overhead
-
-Trace data distributed across nodes
-
-Bandwidth per node = 30 Gbps / 3 = 10 Gbps, plus overhead = 20 Gbps = 2 x 10 Gbps links per node
-
-3 nodes x 2 links per node = 6 links
+- 1x 10 GbE link per redpanda node
+- 5 nodes x 1 link per node = 5 links
 
 ### Compute links
 
-Require trace data bandwidth (Rx) plus pipeline bandwidth (Tx) plus some overhead
-
-Trace data distributed across nodes
-
-Bandwidth per node = 30 Gbps / 3 = 10 Gbps, plus overhead = 20 Gbps = 2 x 10 Gbps links per node
-
-3 nodes x 2 links per node = 6 links
+- 5 nodes x 1 link per node = 5 links
 
 ### Totals
 
-10 Gbps links: 6 + 6 + 6 + 1 (uplink) = 20
+10 Gbps links: 3 + 5 + 5 + 1 (uplink) = 14
 
-Switch throughput: (3 x 20) + (3 x 30) + (3 x 20) + 5 = 60 + 90 + 60 + 5 = 210 Gbps
+24 ports would be ideal to allow for possible expansion.
