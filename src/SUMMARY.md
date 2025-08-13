@@ -7,6 +7,7 @@
    - [Online Compute](./infrastructure/online_compute.md)
    - [Monitoring, Observability and Alerting](./infrastructure/monitoring_observability_alerting.md)
 - [Data Processing Pipeline](./data_processing_pipeline/readme.md)
+- [Glossary](./glossary.md)
 - [Architecture Design Records](./adrs/readme.md)
    - [0001 Record architecture decisions](./adrs/0001-record-architecture-decisions.md)
    - [0002 Use ESS-like architecture for streaming components](./adrs/0002-use-ess-like-architecture-for-streaming-components.md)
